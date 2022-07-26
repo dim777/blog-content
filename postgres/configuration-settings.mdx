@@ -1,0 +1,18 @@
+## Requirements
+| Requirement | Description |
+| ----------- | ----------- |
+| Postgres version      | Should be 12+       |
+| Paragraph   | Text        |
+
+## Configuration settings
+### shared_buffers
+Postgres doesn't work directly with storage system - only via cache buffer. Then wal logs write to disc.
+When serivice is trying to select data from table - it means that firstly data will be querird from buffer -> system file cache -> disc
+Shared buffer divided between all postgres server processes.
+
+Simple calculator:
+- 1/4 server RAM
+- vmstat for fine tuning
+
+### work_mem
+That is so funny! :joy:
