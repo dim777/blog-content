@@ -10,5 +10,20 @@ date: 2022-08-06
 Install postgres drivers from Notebook
 ``` 
 conda install psycopg2
-```
+``` 
 And restart kernel
+``` 
+from sqlalchemy import create_engine
+import pandas as pd
+``` 
+``` 
+url = "demo:5432"
+user = ""
+pwd = ""
+db_name = ""
+```
+
+```
+engine = create_engine(f'postgresql://{user}:{pwd}@{url}/{db_name}')
+```
+
