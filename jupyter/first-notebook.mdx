@@ -12,6 +12,8 @@ Install postgres drivers from Notebook
 conda install psycopg2
 ``` 
 And restart kernel
+
+## Create dataframe
 ``` 
 from sqlalchemy import create_engine
 import pandas as pd
@@ -27,3 +29,28 @@ db_name = ""
 engine = create_engine(f'postgresql://{user}:{pwd}@{url}/{db_name}')
 ```
 
+```
+sql = """
+select rl."method", count(id) from request_log rl 
+where date_trunc('day', rl.occurred_at) IN ('%s') 
+group by rl."method";
+""" % ('\',\''.join(map(str, days)) )
+```
+
+```
+df = pd.read_sql_query(sql,con=engine)
+```
+
+## Create plot
+```
+...
+pa = {"GET": 555, "POST": 388, "DELETE": 2, "PATCH": 15}
+```
+```
+result = pd.concat([pd.Series(bj_prod), pd.Series(gn_prod), pd.Series(pa_prod)], axis=1).fillna(0)
+result = result.rename(columns = {0:'BJ', 1:'GN', 2:'PA'})
+result
+```
+```
+result.plot.bar()
+```
