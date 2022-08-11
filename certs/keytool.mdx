@@ -1,0 +1,21 @@
+https://docs.oracle.com/cd/E19509-01/820-3503/6nf1il6er/index.html
+https://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html
+
+# How to guide
+## Create keystore
+```shell
+keytool -genkey -alias client -keyalg RSA -keysize 4096 -keystore orgcert.keystore -sigalg SHA256withRSA  -validity 365 -dname "C=AE, L=Dubai, O=TEST-LLC, CN=*.dns.com"
+```
+Without wildcard (UAT)
+```shell
+keytool -genkey -alias client -keyalg RSA -keysize 4096 -keystore orgcert.keystore -sigalg SHA256withRSA  -validity 365 -dname "C=AE, L=Dubai, O=TEST-LLC, CN=host.dns.com"
+```
+Create csr
+```shell
+keytool -certreq -alias client -keystore orgcert.keystore -file file.csr
+
+## Import ROOT and CA cert
+```shell
+keytool -import -trustcacerts -alias root -file ROOT-CA_Cert.cer -keystore orgcert.keystore
+keytool -import -trustcacerts -file certnew.cer -keystore orgcert.keystore
+keytool -import -file CA_Cert.cer -alias ca -keystore cacerts.keystore
