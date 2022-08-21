@@ -22,5 +22,6 @@ Change docker image default to dim777/teamcity-minimal-agent-2022-03-04:EAP-linu
 ```bash
 echo 2> context/.dockerignore
 echo TeamCity >> context/.dockerignore
-docker build -f "context/generated/linux/Agent/UbuntuARM/20.04/Dockerfile" -t teamcity-agent:EAP-linux-arm64 "context"
+docker build -f "context/generated/linux/Agent/UbuntuARM/20.04/Dockerfile" -t teamcity-agent-2022-03-04:EAP-linux-arm64 "context"
+docker tag teamcity-agent-2022-03-04:EAP-linux-arm64 dim777/teamcity-agent-2022-03-04:EAP-linux-arm64
 ```
