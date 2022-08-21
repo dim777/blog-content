@@ -3,16 +3,22 @@ title: How to add teamcity arm based build agent for k8s
 path: /kubernetes/oci-dev-tools
 date: 2022-08-21
 ---
-## Just a sample file
+## Build arm-based 
 https://github.com/JetBrains/teamcity-docker-images/blob/master/context/generated/teamcity-agent.md#EAP-linux-sudo
 Build mininal image:
 ```bash
 docker pull ubuntu:20.04
+cd context
 echo TeamCity/webapps > .dockerignore
 echo TeamCity/devPackage >> .dockerignore
 echo TeamCity/lib >> .dockerignore
-docker build -f "context/generated/linux/MinimalAgent/UbuntuARM/20.04/Dockerfile" -t teamcity-minimal-agent:EAP-linux-arm64 "context"
+cd ..
+docker buildx build -f "context/generated/linux/MinimalAgent/UbuntuARM/20.04/Dockerfile" -t teamcity-minimal-agent-2022-03-04:EAP-linux-arm64 "context"
+docker tag teamcity-minimal-agent-2022-03-04:EAP-linux-arm64 dim777/teamcity-minimal-agent-2022-03-04:EAP-linux-arm64
+docker push dim777/teamcity-minimal-agent-2022-03-04:EAP-linux-arm64 
 ```
+Change docker image default to dim777/teamcity-minimal-agent-2022-03-04:EAP-linux-arm64 in context/generated/linux/Agent/UbuntuARM/20.04/Dockerfile
+
 ```bash
 echo 2> context/.dockerignore
 echo TeamCity >> context/.dockerignore
