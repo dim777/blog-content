@@ -19,11 +19,12 @@ docker push dim777/teamcity-minimal-agent-2022-03-04:EAP-linux-arm64
 ```
 Change docker image default to dim777/teamcity-minimal-agent-2022-03-04:EAP-linux-arm64 in context/generated/linux/Agent/UbuntuARM/20.04/Dockerfile
 
-> ℹ️ Need to 
+> ℹ️ Need to add following lines instead concrete git versions
+> apt-get update -y && apt-get install -y git git-lfs && \
 
 ```bash
 echo 2> context/.dockerignore
 echo TeamCity >> context/.dockerignore
-docker build -f "context/generated/linux/Agent/UbuntuARM/20.04/Dockerfile" -t teamcity-agent-2022-03-04:EAP-linux-arm64 "context"
+docker buildx build -f "context/generated/linux/Agent/UbuntuARM/20.04/Dockerfile" -t teamcity-agent-2022-03-04:EAP-linux-arm64 "context"
 docker tag teamcity-agent-2022-03-04:EAP-linux-arm64 dim777/teamcity-agent-2022-03-04:EAP-linux-arm64
 ```
