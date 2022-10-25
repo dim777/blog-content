@@ -1,1 +1,8 @@
+# Data mesh
+## 
+My First Law of Architecture is: "Whatever architecture you design is wrong; either now because you didn’t understand the requirements fully, or eventually because something changes."
 
+- All data consumers should be tolerant of multiple delivery (business logic level)
+- All data consumers should be tolerant of out-of-order delivery for up to N seconds
+- All data producers should produce idempotent records
+- Event sourcing is usually more complex than necessary. Start by publishing “fat objects” for your records tenants and come back to event sourcing if you really need it.
